@@ -1,6 +1,6 @@
 ## MySQL Download
 
-**本次MySQL基于Ubuntu**
+## **本次MySQL安装基于Ubuntu版本Ubuntu 24.04.3 LTS**
 
 ----
 
@@ -70,7 +70,7 @@
     ```
     ![result](./material/mysql_material/9.png)
 
-  - #### 之后会让你输入root密码（随便输入就行，随便输入一个密码就行）
+  - #### 之后会让你输入root密码（随便输入一个密码就行,但是需要记住，之后要用）
     ![result](./material/mysql_material/7.png)
     #### 输入之后，键盘下键，选择`ok`，回车。
 
@@ -89,3 +89,77 @@
     mysql --version
     ```
     ![result](./material/mysql_material/11.png)
+    #### 看到以上内容你就可以判断自己安装成功了
+
+- ### 6.查看当前MySQL状态
+  
+  - #### 指令
+    ```bash
+    sudo systemctl status mysql
+    ```
+    ![result](./material/mysql_material/12.png)
+  
+  - #### 如果你采用的是较老的ubuntu版本也可以尝试以下的指令
+    ```bash
+    /etc/init.d/mysql status
+    ```
+
+- ### 7. MySQL初始化
+
+  - #### 指令
+    ```bash
+    mysql_secure_installation
+    ```
+    ![result](./material/mysql_material/13.png)
+    #### 它会询问你密码，把刚刚设置的密码输入就行
+
+  - #### 之后会询问你是否启用密码强度验证插件
+    ![result](./material/mysql_material/14.png)
+
+    - ##### 如果你想要启动点击`y`
+      ##### 启用后，你可以选择以下策略等级
+      | 级别（Policy） | 最低长度 | 要求                                                                 |
+      |----------------|----------|----------------------------------------------------------------------|
+      | `LOW`          | 8        | 仅要求密码长度 ≥ 8 位。                                              |
+      | `MEDIUM`       | 8        | 长度 ≥ 8，并且必须包含以下四类字符中的**至少三类**：<br>• 小写字母（a-z）<br>• 大写字母（A-Z）<br>• 数字（0-9）<br>• 特殊字符（如 `!@#$%^&*`） |
+      | `STRONG`       | 8        | 满足 `MEDIUM` 所有要求，**且不能包含字典中的单词**（需系统支持字典文件）。 |
+
+    - #### 如果不启动，直接点击回车就行（本地开发，个人学习我们一般不启动）
+  
+  - #### 之后它会询问你是否修改root密码
+    ![result](./material/mysql_material/15.png)
+
+    - ##### 点击`y`，之后回车就是修改
+
+    - ##### 直接回车就是不修改，还是我们之前设置的密码（这里我们选择不修改）。
+
+  - #### 之后会询问你是否移除匿名用户
+    ![result](./material/mysql_material/16.png)
+    #### 点击`y`，回车
+
+  - #### 是否禁止远程root用户登陆
+    ![resulr](./material/mysql_material/17.png)
+    #### 直接回车，允许
+
+  - #### 是否移除自带的测试数据库
+    ![result](./material/mysql_material/18.png)
+    ### 直接回车，不移除
+
+  - #### 是否刷新权限
+    ![result](./material/mysql_material/19.png)
+    #### 点击`y`，回车刷新
+
+  - #### 看到以下结果就说明，MySQL初始化成功了
+    ![result](./material/mysql_material/20.png)
+
+- ### 8. 测试是否可以成功登陆MySQL
+  
+  - #### 指令
+    ```bash
+    mysql -u root -p
+    ```
+    ![result](./material/mysql_material/21.png)
+
+  - #### 之后会让你输入密码
+    ![result](./material/mysql_material/22.png)
+    #### 没有修改就输入你之前的密码，修改了就输入修改之后的密码
